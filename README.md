@@ -1,0 +1,1 @@
+Requires React >= 16.5

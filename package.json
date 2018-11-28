@@ -1,0 +1,68 @@
+{
+  "name": "react-memo-codemod",
+  "version": "1.0.0",
+  "description": "Codemod to convert functional components to React.memo",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint src __tests__ --ext .js",
+    "test": "jest",
+    "clean": "rm -rf lib",
+    "build": "npm run clean && babel src -d lib",
+    "prepublish": "npm run build",
+    "fixlint": "npm run lint -- --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cachebabies/react-memo-codemod.git"
+  },
+  "keywords": [
+    "react",
+    "codemod",
+    "memo"
+  ],
+  "license": "MIT",
+  "jest": {
+    "preset": "amex-jest-preset",
+    "testPathIgnorePatterns": [
+      "__tests__/fixtures/"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!**/node_modules/**"
+    ]
+  },
+  "bugs": {
+    "url": "https://github.com/cachebabies/react-memo-codemod/issues"
+  },
+  "homepage": "https://github.com/cachebabies/react-memo-codemod#readme",
+  "contributors": [
+    "David Hyun Choi",
+    "Christopher Forehand"
+  ],
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-generator": "^6.26.1",
+    "babel-traverse": "^6.26.0",
+    "babel-types": "^6.26.0",
+    "babylon": "^6.18.0",
+    "fs-extra": "^7.0.1",
+    "immutable": "^4.0.0-rc.12",
+    "lodash": "^4.17.11",
+    "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1",
+    "recursive-readdir": "^2.2.2"
+  },
+  "devDependencies": {
+    "amex-jest-preset": "^5.0.0",
+    "amex-jest-preset-react": "^5.0.1",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-amex": "^1.1.0",
+    "eslint": "^5.9.0",
+    "eslint-config-amex": "^9.0.0",
+    "jest": "^23.6.0"
+  }
+}

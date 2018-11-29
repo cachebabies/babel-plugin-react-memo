@@ -6,12 +6,8 @@ exports[`utils arrowFunctionExpressionVisitor should wrap arrow function with me
 });"
 `;
 
-exports[`utils updateFunctionalComponent should wrap variable declaration with memo 1`] = `
-"const fakeComponent = () => {
-  return <div>hello</div>;
-};"
-`;
-
 exports[`utils updateReactImportNode should add named export to react default export 1`] = `"import React, { memo } from 'react';"`;
 
 exports[`utils updateReactImportNode should extend named exports 1`] = `"import React, { Component, Foo, memo } from 'react';"`;
+
+exports[`utils updateReactImportNode should not extend named exports if not react 1`] = `"import { isEqual } from 'lodash';"`;

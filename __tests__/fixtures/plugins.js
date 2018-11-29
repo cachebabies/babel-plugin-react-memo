@@ -6,14 +6,6 @@ export const importPlugin = functionUnderTest => ({
   },
 });
 
-export const jsxPlugin = functionUnderTest => ({
-  visitor: {
-    JSXElement(path) {
-      functionUnderTest(path);
-    },
-  },
-});
-
 export const arrowFunctionPlugin = functionUnderTest => ({
   visitor: {
     ArrowFunctionExpression(path) {

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint src __tests__ --ext .js",
-    "test": "jest",
+    "test": "jest && npm run lint",
     "clean": "rm -rf lib",
     "build": "npm run clean && babel src -d lib",
     "prepublish": "npm run build",
@@ -55,7 +55,6 @@
   },
   "devDependencies": {
     "amex-jest-preset": "^5.0.0",
-    "amex-jest-preset-react": "^5.0.1",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-syntax-jsx": "^6.18.0",

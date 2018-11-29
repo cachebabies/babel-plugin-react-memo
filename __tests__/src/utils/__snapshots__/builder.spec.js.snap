@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`utils updateFunctionalComponent should update the right way 1`] = `
-"const fakeComponent = () => {
+exports[`utils arrowFunctionExpressionVisitor should wrap arrow function with memo 1`] = `
+"const fakeComponent = memo(() => {
   return <div>hello</div>;
-};"
+});"
 `;
 
 exports[`utils updateFunctionalComponent should wrap variable declaration with memo 1`] = `

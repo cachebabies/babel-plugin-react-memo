@@ -13,3 +13,11 @@ export const jsxPlugin = functionUnderTest => ({
     },
   },
 });
+
+export const arrowFunctionPlugin = functionUnderTest => ({
+  visitor: {
+    ArrowFunctionExpression(path) {
+      functionUnderTest(path);
+    },
+  },
+});

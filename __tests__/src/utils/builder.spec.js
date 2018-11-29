@@ -2,8 +2,13 @@ import * as babel from 'babel-core';
 import { 
     updateReactImportNode,
     updateFunctionalComponent,
+    arrowFunctionExpressionVisitor,
  } from '../../../src/utils/builder';
-import { importPlugin, jsxPlugin } from '../../fixtures/plugins';
+import { 
+  importPlugin, 
+  jsxPlugin,
+  arrowFunctionPlugin,
+} from '../../fixtures/plugins';
 
 let program;
 
@@ -29,9 +34,20 @@ describe('utils', () => {
         program = `const fakeComponent = () => { return (<div>hello</div>); }`;
         const plugin = jsxPlugin(updateFunctionalComponent);
         const { code } = babel.transform(program, { 
-            plugins: ["syntax-jsx", plugin],
+            plugins: [plugin, "syntax-jsx"],
         });
         expect(code).toMatchSnapshot();
       });
   });
+
+  describe('arrowFunctionExpressionVisitor', () => {
+    it('should wrap arrow function with memo', () => {
+      program = `const fakeComponent = () => { return (<div>hello</div>); }`;
+      const plugin = arrowFunctionPlugin(arrowFunctionExpressionVisitor);
+      const { code } = babel.transform(program, { 
+          plugins: [plugin, "syntax-jsx"],
+      });
+      expect(code).toMatchSnapshot();
+    });
+});
 });

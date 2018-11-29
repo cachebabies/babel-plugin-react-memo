@@ -1,6 +1,4 @@
 import * as builder from 'babel-types';
-import { wrap } from 'module';
-import { pathToFileURL } from 'url';
 
 export const updateReactImportNode = (importPath) => {
   const { node: { specifiers, source } } = importPath;
@@ -35,5 +33,46 @@ export const updateFunctionalComponent = (jsxPath) => {
         }
     }
 }
+
+export const variableDeclarationVisitor = (path) => {
+    const { node } = path;
+}
+
+/**
+ * for this one maybe we convert a function declaration into a fat arrow
+ * then use the ArrowFunctionVisitor to update?
+ */
+
+export const functionDeclarationVisitor = (path) => {
+    // console.log(path.node.body.body);
+    const { node } = path;
+    const body = path.node.body.body;
+    const returnStatement = body.find(item => item.type === 'ReturnStatement');
+    console.log(returnStatement);
+    if(returnStatement.argument.type === 'JSXElement') {
+        const wrapped = wrapWithMemo(node);
+        path.replaceWith(wrapped);
+    }
+};
+
+export const arrowFunctionExpressionVisitor = (path) => {
+    const { 
+        parent: { 
+            type: parentType = '', 
+            callee: { 
+                name: calleeName = '' 
+            } = {} 
+        },
+        node,
+     } = path;
+        
+    const hasMemoCallExpression = parentType === 'CallExpression' && calleeName === 'memo';
+    const body = node.body.body;
+    const returnStatement = body.find(item => item.type === 'ReturnStatement');
+    if(!hasMemoCallExpression && returnStatement.argument.type === 'JSXElement') {
+        const wrapped = wrapWithMemo(node);
+        path.replaceWith(wrapped);
+    }
+};
 
 

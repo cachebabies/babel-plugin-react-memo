@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint src __tests__ --ext .js",
-    "test": "jest && npm run lint",
+    "test": "jest",
     "clean": "rm -rf lib",
     "build": "npm run clean && babel src -d lib",
     "prepublish": "npm run build",
@@ -58,6 +58,7 @@
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-amex": "^1.1.0",
     "eslint": "^5.9.0",

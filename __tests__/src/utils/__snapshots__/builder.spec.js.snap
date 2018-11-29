@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`utils arrowFunctionExpressionVisitor should not wrap arrow function with memo within ClassBody 1`] = `
+"class fakeComponent extends Component {
+  render() {
+    const jsxreturn = () => {
+      return <div>hello</div>;
+    };
+  }
+}"
+`;
+
+exports[`utils arrowFunctionExpressionVisitor should not wrap arrow function with memo within ClassProperty 1`] = `
+"class fakeComponent extends Component {
+  jsxreturn() {
+    return <div>hello</div>;
+  }render() {
+    return <div>hello</div>;
+  }
+}"
+`;
+
 exports[`utils arrowFunctionExpressionVisitor should wrap arrow function with memo 1`] = `
 "const fakeComponent = memo(() => {
   return <div>hello</div>;

@@ -35,8 +35,10 @@ export const arrowFunctionExpressionVisitor = (path) => {
   const hasMemoCallExpression = parentType === 'CallExpression' && calleeName === 'memo';
   const { body: { body } } = node;
   const returnStatement = body.find(item => item.type === 'ReturnStatement');
-  if (!hasMemoCallExpression && returnStatement.argument.type === 'JSXElement') {
-    const wrapped = wrapWithMemo(node);
-    path.replaceWith(wrapped);
+  if (path.parent.type !== 'ClassProperty' && path.getFunctionParent().parent.type !== 'ClassBody') {
+    if (!hasMemoCallExpression && returnStatement.argument.type === 'JSXElement') {
+      const wrapped = wrapWithMemo(node);
+      path.replaceWith(wrapped);
+    }
   }
 };

@@ -43,5 +43,23 @@ describe('utils', () => {
       });
       expect(code).toMatchSnapshot();
     });
+
+    it('should not wrap arrow function with memo within ClassProperty', () => {
+      program = `class fakeComponent extends Component { jsxreturn() { return <div>hello</div> } render() { return (<div>hello</div>); } }`;
+      const plugin = arrowFunctionPlugin(arrowFunctionExpressionVisitor);
+      const { code } = babel.transform(program, {
+        plugins: [plugin, 'syntax-jsx'],
+      });
+      expect(code).toMatchSnapshot();
+    });
+
+    it('should not wrap arrow function with memo within ClassBody', () => {
+      program = 'class fakeComponent extends Component { render() { const jsxreturn = () => { return (<div>hello</div>); } } }';
+      const plugin = arrowFunctionPlugin(arrowFunctionExpressionVisitor);
+      const { code } = babel.transform(program, {
+        plugins: [plugin, 'syntax-jsx'],
+      });
+      expect(code).toMatchSnapshot();
+    });
   });
 });

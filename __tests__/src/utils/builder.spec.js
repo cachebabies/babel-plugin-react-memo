@@ -45,7 +45,7 @@ describe('utils', () => {
     });
 
     it('should not wrap arrow function with memo within ClassProperty', () => {
-      program = `class fakeComponent extends Component { jsxreturn() { return <div>hello</div> } render() { return (<div>hello</div>); } }`;
+      program = 'class fakeComponent extends Component { jsxreturn() { return <div>hello</div> } render() { return (<div>hello</div>); } }';
       const plugin = arrowFunctionPlugin(arrowFunctionExpressionVisitor);
       const { code } = babel.transform(program, {
         plugins: [plugin, 'syntax-jsx'],

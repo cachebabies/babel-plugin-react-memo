@@ -1,43 +1,30 @@
 import * as babel from 'babel-core';
-import {
-  updateReactImportNode,
-  arrowFunctionExpressionVisitor,
-} from '../../../src/utils/builder';
-import {
-  importPlugin,
-  arrowFunctionPlugin,
-} from '../../fixtures/plugins';
+import plugin from '../../src';
 
-let program;
-
-describe('utils', () => {
-  describe('updateReactImportNode', () => {
+describe('index', () => {
+  describe('ImportDeclaration', () => {
     it('should add named export to react default export', () => {
-      program = 'import React from \'react\'';
-      const plugin = importPlugin(updateReactImportNode);
+      const program = 'import React from \'react\'';
       const { code } = babel.transform(program, { plugins: [plugin] });
       expect(code).toMatchSnapshot();
     });
 
     it('should extend named exports', () => {
-      program = 'import React, { Component, Foo } from \'react\'';
-      const plugin = importPlugin(updateReactImportNode);
+      const program = 'import React, { Component, Foo } from \'react\'';
       const { code } = babel.transform(program, { plugins: [plugin] });
       expect(code).toMatchSnapshot();
     });
 
     it('should not extend named exports if not react', () => {
-      program = 'import { isEqual } from \'lodash\'';
-      const plugin = importPlugin(updateReactImportNode);
+      const program = 'import { isEqual } from \'lodash\'';
       const { code } = babel.transform(program, { plugins: [plugin] });
       expect(code).toMatchSnapshot();
     });
   });
 
-  describe('arrowFunctionExpressionVisitor', () => {
+  describe('ArrowFunctionExpression', () => {
     it('should wrap arrow function with memo', () => {
-      program = 'const fakeComponent = () => { return (<div>hello</div>); }';
-      const plugin = arrowFunctionPlugin(arrowFunctionExpressionVisitor);
+      const program = 'const fakeComponent = () => { return (<div>hello</div>); }';
       const { code } = babel.transform(program, {
         plugins: [plugin, 'syntax-jsx'],
       });
@@ -45,8 +32,7 @@ describe('utils', () => {
     });
 
     it('should not wrap arrow function with memo within ClassProperty', () => {
-      program = 'class fakeComponent extends Component { jsxreturn() { return <div>hello</div> } render() { return (<div>hello</div>); } }';
-      const plugin = arrowFunctionPlugin(arrowFunctionExpressionVisitor);
+      const program = 'class fakeComponent extends Component { jsxreturn() { return <div>hello</div> } render() { return (<div>hello</div>); } }';
       const { code } = babel.transform(program, {
         plugins: [plugin, 'syntax-jsx'],
       });
@@ -54,8 +40,7 @@ describe('utils', () => {
     });
 
     it('should not wrap arrow function with memo within ClassBody', () => {
-      program = 'class fakeComponent extends Component { render() { const jsxreturn = () => { return (<div>hello</div>); } } }';
-      const plugin = arrowFunctionPlugin(arrowFunctionExpressionVisitor);
+      const program = 'class fakeComponent extends Component { render() { const jsxreturn = () => { return (<div>hello</div>); } } }';
       const { code } = babel.transform(program, {
         plugins: [plugin, 'syntax-jsx'],
       });

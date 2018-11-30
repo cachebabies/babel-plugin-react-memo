@@ -31,6 +31,34 @@ describe('index', () => {
       expect(code).toMatchSnapshot();
     });
 
+    it('should only wrap valid JSX component', () => {
+      const program = `const fakeComponent = () => { return (<div>hello</div>); }
+        const fakeFunction = () => null;
+      `;
+      const { code } = babel.transform(program, {
+        plugins: [plugin, 'syntax-jsx'],
+      });
+      expect(code).toMatchSnapshot();
+    });
+
+    it('should not wrap function that is already wrapped', () => {
+      const program = `const fakeComponent = memo(() => { return (<div>hello</div>); });
+        const fakeFunction = () => null;
+      `;
+      const { code } = babel.transform(program, {
+        plugins: [plugin, 'syntax-jsx'],
+      });
+      expect(code).toMatchSnapshot();
+    });
+
+    it('should wrap function that returns jsx directly', () => {
+      const program = `const fakeComponent = () => (<div>hello</div>);`;
+      const { code } = babel.transform(program, {
+        plugins: [plugin, 'syntax-jsx'],
+      });
+      expect(code).toMatchSnapshot();
+    });
+
     it('should not wrap arrow function with memo within ClassProperty', () => {
       const program = 'class fakeComponent extends Component { jsxreturn() { return <div>hello</div> } render() { return (<div>hello</div>); } }';
       const { code } = babel.transform(program, {

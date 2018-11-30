@@ -20,11 +20,27 @@ exports[`index ArrowFunctionExpression should not wrap arrow function with memo 
 }"
 `;
 
+exports[`index ArrowFunctionExpression should not wrap function that is already wrapped 1`] = `
+"const fakeComponent = memo(() => {
+        return <div>hello</div>;
+});
+const fakeFunction = () => null;"
+`;
+
+exports[`index ArrowFunctionExpression should only wrap valid JSX component 1`] = `
+"const fakeComponent = memo(() => {
+        return <div>hello</div>;
+});
+const fakeFunction = () => null;"
+`;
+
 exports[`index ArrowFunctionExpression should wrap arrow function with memo 1`] = `
 "const fakeComponent = memo(() => {
   return <div>hello</div>;
 });"
 `;
+
+exports[`index ArrowFunctionExpression should wrap function that returns jsx directly 1`] = `"const fakeComponent = memo(() => <div>hello</div>);"`;
 
 exports[`index ImportDeclaration should add named export to react default export 1`] = `"import React, { memo } from 'react';"`;
 

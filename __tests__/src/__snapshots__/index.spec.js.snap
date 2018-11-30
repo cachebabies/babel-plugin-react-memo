@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`index ArrowFunctionExpression should not wrap arrow function with memo within ClassBody 1`] = `
+"class fakeComponent extends Component {
+  render() {
+    const jsxreturn = () => {
+      return <div>hello</div>;
+    };
+  }
+}"
+`;
+
+exports[`index ArrowFunctionExpression should not wrap arrow function with memo within ClassProperty 1`] = `
+"class fakeComponent extends Component {
+  jsxreturn() {
+    return <div>hello</div>;
+  }render() {
+    return <div>hello</div>;
+  }
+}"
+`;
+
+exports[`index ArrowFunctionExpression should wrap arrow function with memo 1`] = `
+"const fakeComponent = memo(() => {
+  return <div>hello</div>;
+});"
+`;
+
+exports[`index ImportDeclaration should add named export to react default export 1`] = `"import React, { memo } from 'react';"`;
+
+exports[`index ImportDeclaration should extend named exports 1`] = `"import React, { Component, Foo, memo } from 'react';"`;
+
+exports[`index ImportDeclaration should not extend named exports if not react 1`] = `"import { isEqual } from 'lodash';"`;

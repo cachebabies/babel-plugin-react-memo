@@ -28,16 +28,17 @@ export default ({ types: builder }) => ({
         builder.callExpression(builder.identifier('memo'), [node])
       );
 
-      if (path.parent.type !== 'ClassProperty' && path.getFunctionParent().parent.type !== 'ClassBody') {    
-        if(node.body.type === 'JSXElement' && !hasMemoCallExpression) {
+      if (path.parent.type !== 'ClassProperty' && path.getFunctionParent().parent.type !== 'ClassBody') {
+        if (node.body.type === 'JSXElement' && !hasMemoCallExpression) {
           path.replaceWith(wrapped);
         }
 
-        if(node.body.type === 'BlockStatement') {
+        if (node.body.type === 'BlockStatement') {
           const { body: { body } } = node;
-          const returnStatement = body.find(item => item.type === 'ReturnStatement');
-  
-          if (returnStatement.argument.type === 'JSXElement' && !hasMemoCallExpression) {
+          const returnStatement = body.find(item => (item.argument && item.argument.type === 'JSXElement')
+              && item.type === 'ReturnStatement');
+
+          if (returnStatement && !hasMemoCallExpression) {
             path.replaceWith(wrapped);
           }
         }

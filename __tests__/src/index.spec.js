@@ -52,7 +52,7 @@ describe('index', () => {
     });
 
     it('should wrap function that returns jsx directly', () => {
-      const program = `const fakeComponent = () => (<div>hello</div>);`;
+      const program = 'const fakeComponent = () => (<div>hello</div>);';
       const { code } = babel.transform(program, {
         plugins: [plugin, 'syntax-jsx'],
       });

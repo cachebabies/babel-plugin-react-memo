@@ -23,15 +23,23 @@ export default ({ types: builder }) => ({
       } = path;
 
       const hasMemoCallExpression = parentType === 'CallExpression' && calleeName === 'memo';
-      const { body: { body } } = node;
-      const returnStatement = body.find(item => item.type === 'ReturnStatement');
 
-      if (path.parent.type !== 'ClassProperty' && path.getFunctionParent().parent.type !== 'ClassBody') {
-        if (!hasMemoCallExpression && returnStatement.argument.type === 'JSXElement') {
-          const wrapped = builder.expressionStatement(
-            builder.callExpression(builder.identifier('memo'), [node])
-          );
+      const wrapped = builder.expressionStatement(
+        builder.callExpression(builder.identifier('memo'), [node])
+      );
+
+      if (path.parent.type !== 'ClassProperty' && path.getFunctionParent().parent.type !== 'ClassBody') {    
+        if(node.body.type === 'JSXElement' && !hasMemoCallExpression) {
           path.replaceWith(wrapped);
+        }
+
+        if(node.body.type === 'BlockStatement') {
+          const { body: { body } } = node;
+          const returnStatement = body.find(item => item.type === 'ReturnStatement');
+  
+          if (returnStatement.argument.type === 'JSXElement' && !hasMemoCallExpression) {
+            path.replaceWith(wrapped);
+          }
         }
       }
     },

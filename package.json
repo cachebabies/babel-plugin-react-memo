@@ -1,5 +1,5 @@
 {
-  "name": "react-memo-codemod",
+  "name": "babel-plugin-react-memo",
   "version": "1.0.0",
   "description": "Codemod to convert functional components to React.memo",
   "main": "index.js",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cachebabies/react-memo-codemod.git"
+    "url": "git+https://github.com/cachebabies/babel-plugin-react-memo.git"
   },
   "keywords": [
     "react",
@@ -32,33 +32,22 @@
     ]
   },
   "bugs": {
-    "url": "https://github.com/cachebabies/react-memo-codemod/issues"
+    "url": "https://github.com/cachebabies/babel-plugin-react-memo/issues"
   },
-  "homepage": "https://github.com/cachebabies/react-memo-codemod#readme",
+  "homepage": "https://github.com/cachebabies/babel-plugin-react-memo#readme",
   "contributors": [
     "David Hyun Choi",
     "Christopher Forehand"
   ],
   "dependencies": {
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-generator": "^6.26.1",
-    "babel-traverse": "^6.26.0",
-    "babel-types": "^6.26.0",
-    "babylon": "^6.18.0",
-    "fs-extra": "^7.0.1",
-    "immutable": "^4.0.0-rc.12",
-    "lodash": "^4.17.11",
-    "minimist": "^1.2.0",
-    "mkdirp": "^0.5.1",
-    "recursive-readdir": "^2.2.2"
+    "babel-core": "^6.26.3"
   },
   "devDependencies": {
     "amex-jest-preset": "^5.0.0",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-syntax-jsx": "^6.18.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-amex": "^1.1.0",
     "eslint": "^5.9.0",

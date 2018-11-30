@@ -2,7 +2,7 @@
   "name": "babel-plugin-react-memo",
   "version": "1.0.0",
   "description": "Codemod to convert functional components to React.memo",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "lint": "eslint src __tests__ --ext .js",
     "test": "jest",
